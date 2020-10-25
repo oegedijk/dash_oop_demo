@@ -1,3 +1,4 @@
 dash_oop_components
 pandas
 plotly-express
+gunicorn
