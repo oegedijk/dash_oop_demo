@@ -1,0 +1,44 @@
+dash_app:
+  name: DashApp
+  module: dash_oop_components.core
+  params:
+    dashboard_component:
+      dash_component:
+        name: CovidDashboard
+        module: dashboard_components
+        params:
+          plot_factory:
+            dash_figure_factory:
+              name: CovidPlots
+              module: dashboard_components
+              params:
+                datafile: covid.csv
+                exclude_countries: []
+          europe_countries:
+          - Italy
+          - Spain
+          - Germany
+          - France
+          - Iran
+          - United_Kingdom
+          - Switzerland
+          - Netherlands
+          - Belgium
+          - Austria
+          - Portugal
+          - Norway
+          asia_countries:
+          - China
+          - Vietnam
+          - Malaysia
+          - Philippines
+          - Taiwan
+          - Myanmar
+          - Thailand
+          - South_Korea
+          - Japan
+    port: 8050
+    mode: dash
+    kwargs:
+      external_stylesheets:
+      - https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css
