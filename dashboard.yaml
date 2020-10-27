@@ -19,7 +19,6 @@ dash_app:
           - Spain
           - Germany
           - France
-          - Iran
           - United_Kingdom
           - Switzerland
           - Netherlands
@@ -37,7 +36,7 @@ dash_app:
           - Thailand
           - South_Korea
           - Japan
-          name: 9xMPKW7aTL
+          name: Gb5GnxuKFC
     port: 8050
     mode: dash
     querystrings: true

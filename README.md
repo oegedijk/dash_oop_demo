@@ -1,6 +1,25 @@
 # dash_oop_demo
 
-Deployment example of [dash_oop_components](http://github.com/oegedijk/dash_oop_components) library
+Deployment example of [dash_oop_components](http://github.com/oegedijk/dash_oop_components) library.
+
+Shows how you can use re-usable nested components to design your [dash](dash.plotly.com) app:
+- All components use the same `CovidPlots(DashFigureFactory)`
+- Two plot components:
+    - `CovidTimeSeries(DashComponent)`
+    - `CovidPieChart(DashComponent)`
+- A `CovidComposite(DashComponent)` that combines both plot components and adds dropdowns that control both components
+- A `CovidDashboard(DashComponent)` that combines four different `CovidComposites` in four different configurations:
+    - Asian countries only
+    - European countries only
+    - Cases only
+    - Deaths only
+- The `CovidDashboard` gets run by a `DashApp`.
+
+Plus: the state of the app gets automatically saved to the url querystring!
+
+
+![](dash_oop_demo.gif)
+
 
 - `dashboard_components.py` contains the definitions of the `DashFigureFactory` and `DashComponents`
 - `build_dashboard.py` builds the `dashboard.yaml` configuration:

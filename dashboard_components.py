@@ -219,12 +219,12 @@ class CovidComposite(DashComponent):
 
 class CovidDashboard(DashComponent):
     def __init__(self, plot_factory, 
-                 europe_countries = ['Italy',  'Spain', 'Germany', 'France', 'Iran', 
+                 europe_countries = ['Italy',  'Spain', 'Germany', 'France', 
                                      'United_Kingdom', 'Switzerland', 'Netherlands',  
                                      'Belgium', 'Austria', 'Portugal', 'Norway'],
                 asia_countries = ['China', 'Vietnam', 'Malaysia', 'Philippines', 
                                   'Taiwan', 'Myanmar', 'Thailand', 'South_Korea', 'Japan']):
-        super().__init__()
+        super().__init__(title="Covid Dashboard")
         
         self.europe = CovidComposite(self.plot_factory, "Europe", 
                                      include_countries=self.europe_countries, name="eur")
