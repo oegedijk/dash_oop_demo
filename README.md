@@ -21,9 +21,14 @@ Plus: the state of the app gets automatically saved to the url querystring!
 ![](dash_oop_demo.gif)
 
 
-- `dashboard_components.py` contains the definitions of the `DashFigureFactory` and `DashComponents`
-- `build_dashboard.py` builds the `dashboard.yaml` configuration:
+## Files in the repo:
 
+- `dashboard_components.py` contains the definitions of the `DashFigureFactory` and `DashComponents`:
+- `build_dashboard.py` builds the `dashboard.yaml` configuration
+- `dashboard.py` simply loads the config and exposes the flask app:
+
+
+**build_dashboard.py**
 ```python
 from dashboard_components import CovidPlots, CovidDashboard
 from dash_bootstrap_components.themes import FLATLY
@@ -35,8 +40,8 @@ app = DashApp(dashboard, external_stylesheets=[FLATLY])
 app.to_yaml("dashboard.yaml")
 ```
 
-- `dashboard.py` simply loads the config and exposes the flask app:
 
+**dashboard.py**
 ```python
 from dash_oop_components import DashApp
 
