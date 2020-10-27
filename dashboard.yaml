@@ -1,15 +1,15 @@
 dash_app:
-  name: DashApp
+  class_name: DashApp
   module: dash_oop_components.core
   params:
     dashboard_component:
       dash_component:
-        name: CovidDashboard
+        class_name: CovidDashboard
         module: dashboard_components
         params:
           plot_factory:
             dash_figure_factory:
-              name: CovidPlots
+              class_name: CovidPlots
               module: dashboard_components
               params:
                 datafile: covid.csv
@@ -37,8 +37,11 @@ dash_app:
           - Thailand
           - South_Korea
           - Japan
+          name: 9xMPKW7aTL
     port: 8050
     mode: dash
+    querystrings: true
     kwargs:
       external_stylesheets:
       - https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css
+      suppress_callback_exceptions: true

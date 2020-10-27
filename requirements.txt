@@ -1,4 +1,4 @@
-dash_oop_components
+dash_oop_components>=0.0.3
 pandas
 plotly-express
 gunicorn

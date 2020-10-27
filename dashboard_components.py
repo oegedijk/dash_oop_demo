@@ -106,7 +106,7 @@ class CovidPieChart(DashComponent):
         if not self.metric:
             self.metric = self.include_metrics[0]
         
-    def layout(self):
+    def layout(self, params=None):
         return dbc.Container([
             dbc.Row([
                 dbc.Col([
@@ -146,7 +146,7 @@ class CovidComposite(DashComponent):
                  hide_country_dropdown=False, 
                  include_countries=None, countries=None, 
                  hide_metric_dropdown=False, 
-                 include_metrics=None, metric='cases'):
+                 include_metrics=None, metric='cases', name=None):
         super().__init__(title=title)
         
         if not self.include_countries:
@@ -169,19 +169,19 @@ class CovidComposite(DashComponent):
                 hide_country_dropdown=True, countries=self.countries,
                 hide_metric_dropdown=True, metric=self.metric)
         
-    def layout(self):
+    def layout(self, params=None):
         return dbc.Container([
             dbc.Row([
                 dbc.Col([
                     html.H1(self.title),
                     self.make_hideable(
-                        dcc.Dropdown(
+                        self.querystring(params)(dcc.Dropdown)(
                             id='dashboard-metric-dropdown-'+self.name,
                             options=[{'label': metric, 'value': metric} for metric in self.include_metrics],
                             value=self.metric,
                         ), hide=self.hide_metric_dropdown),
                     self.make_hideable(
-                        dcc.Dropdown(
+                        self.querystring(params)(dcc.Dropdown)(
                             id='dashboard-country-dropdown-'+self.name,
                             options=[{'label': metric, 'value': metric} for metric in self.include_countries],
                             value=self.countries,
@@ -227,42 +227,43 @@ class CovidDashboard(DashComponent):
         super().__init__()
         
         self.europe = CovidComposite(self.plot_factory, "Europe", 
-                                     include_countries=self.europe_countries)
-        self.asia = CovidComposite(self.plot_factory, "Asia", include_countries=self.asia_countries)
+                                     include_countries=self.europe_countries, name="eur")
+        self.asia = CovidComposite(self.plot_factory, "Asia", 
+                                    include_countries=self.asia_countries, name="asia")
         self.cases_only = CovidComposite(self.plot_factory, "Cases Only", 
                                          include_metrics=['cases'], metric='cases',
                                          hide_metric_dropdown=True,
-                                         countries=['China', 'Italy', 'Brazil'])
+                                         countries=['China', 'Italy', 'Brazil'], name="cases")
         self.deaths_only = CovidComposite(self.plot_factory, "Deaths Only", 
                                           include_metrics=['deaths'], metric='deaths',
                                           hide_metric_dropdown=True,
-                                          countries=['China', 'Italy', 'Brazil'])
+                                          countries=['China', 'Italy', 'Brazil'], name="deaths")
         
-    def layout(self):
+    def layout(self, params=None):
         return dbc.Container([
             dbc.Row([
                 html.H1("Covid Dashboard"),
             ]),
             dbc.Row([
                 dbc.Col([
-                    dcc.Tabs(id="tabs", value=self.europe.name, 
+                    self.querystring(params)(dcc.Tabs)(id="tabs", value=self.europe.name, 
                         children=[
                             dcc.Tab(label=self.europe.title, 
                                     id=self.europe.name, 
                                     value=self.europe.name,
-                                    children=self.europe.layout()),
+                                    children=self.europe.layout(params)),
                             dcc.Tab(label=self.asia.title, 
                                     id=self.asia.name, 
                                     value=self.asia.name,
-                                    children=self.asia.layout()),
+                                    children=self.asia.layout(params)),
                             dcc.Tab(label=self.cases_only.title, 
                                     id=self.cases_only.name, 
                                     value=self.cases_only.name,
-                                    children=self.cases_only.layout()),
+                                    children=self.cases_only.layout(params)),
                             dcc.Tab(label=self.deaths_only.title, 
                                     id=self.deaths_only.name, 
                                     value=self.deaths_only.name,
-                                    children=self.deaths_only.layout()),
+                                    children=self.deaths_only.layout(params)),
                         ]),
                 ])
             ])
