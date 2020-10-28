@@ -231,12 +231,10 @@ class CovidDashboard(DashComponent):
         self.asia = CovidComposite(self.plot_factory, "Asia", 
                                     include_countries=self.asia_countries, name="asia")
         self.cases_only = CovidComposite(self.plot_factory, "Cases Only", 
-                                         include_metrics=['cases'], metric='cases',
-                                         hide_metric_dropdown=True,
+                                         metric='cases', hide_metric_dropdown=True,
                                          countries=['China', 'Italy', 'Brazil'], name="cases")
         self.deaths_only = CovidComposite(self.plot_factory, "Deaths Only", 
-                                          include_metrics=['deaths'], metric='deaths',
-                                          hide_metric_dropdown=True,
+                                          metric='deaths', hide_metric_dropdown=True,
                                           countries=['China', 'Italy', 'Brazil'], name="deaths")
         
     def layout(self, params=None):
