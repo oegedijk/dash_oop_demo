@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-from dash_oop_components import DashFigureFactory, DashComponent, DashApp
+from dash_oop_components import DashFigureFactory, DashComponent, DashComponentTabs, DashApp
 
 import pandas as pd
 import plotly.express as px
@@ -244,25 +244,9 @@ class CovidDashboard(DashComponent):
             ]),
             dbc.Row([
                 dbc.Col([
-                    self.querystring(params)(dcc.Tabs)(id="tabs", value=self.europe.name, 
-                        children=[
-                            dcc.Tab(label=self.europe.title, 
-                                    id=self.europe.name, 
-                                    value=self.europe.name,
-                                    children=self.europe.layout(params)),
-                            dcc.Tab(label=self.asia.title, 
-                                    id=self.asia.name, 
-                                    value=self.asia.name,
-                                    children=self.asia.layout(params)),
-                            dcc.Tab(label=self.cases_only.title, 
-                                    id=self.cases_only.name, 
-                                    value=self.cases_only.name,
-                                    children=self.cases_only.layout(params)),
-                            dcc.Tab(label=self.deaths_only.title, 
-                                    id=self.deaths_only.name, 
-                                    value=self.deaths_only.name,
-                                    children=self.deaths_only.layout(params)),
-                        ]),
+                    self.querystring(params)(DashComponentTabs)(id="tabs", 
+                        tabs=[self.europe, self.asia, self.cases_only, self.deaths_only],
+                        params=params, component=self, single_tab_querystrings=True)
                 ])
             ])
         ], fluid=True)
