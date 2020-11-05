@@ -36,10 +36,11 @@ dash_app:
           - Thailand
           - South_Korea
           - Japan
-          name: Gb5GnxuKFC
+          name: CFHPicFhfU
     port: 8050
     mode: dash
     querystrings: true
+    bootstrap: https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css
     kwargs:
       external_stylesheets:
       - https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css

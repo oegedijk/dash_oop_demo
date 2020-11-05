@@ -1,7 +1,10 @@
 .ONESHELL:
 SHELL := /bin/bash
 
-all: 
+all: build
+
+build:
+	python build_dashboard.py
 
 run:
 	gunicorn --preload dashboard:app
